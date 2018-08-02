@@ -1,0 +1,3 @@
+# Laravel Starter
+
+Laravel starter boilerplate with tailwindcss...
