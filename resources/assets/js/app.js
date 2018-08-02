@@ -1,10 +1,14 @@
 import flatpicker from 'flatpickr'
+import $ from 'jquery'
+import 'fullcalendar'
 
 require('flatpickr/dist/themes/material_blue.css')
+require('fullcalendar/dist/fullcalendar.css')
 
 require('./bootstrap');
 
 window.Vue = require('vue');
+window.$ = $
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

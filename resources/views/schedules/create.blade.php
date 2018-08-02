@@ -68,12 +68,16 @@
 
 @section('js')
   <script>
+    const day = new URL(window.location.href).searchParams.get("day");
+
+
     flatpickr('#time_from', {
       enableTime: true,
       dateFormat: 'Y-m-d H:i',
       minDate: 'today',
       minTime: '09:00',
       maxTime: '20:00',
+      defaultDate: day ? day + ' 09:00' : null
     })
 
     flatpickr('#time_to', {
@@ -82,6 +86,7 @@
       minDate: 'today',
       minTime: '09:00',
       maxTime: '20:00',
+      defaultDate: day ? day + ' 20:00' : null
     })
   </script>
 @stop
