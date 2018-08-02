@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Employee;
+use App\Http\Requests\CreateScheduleRequest;
 use App\Schedule;
 use Illuminate\Http\Request;
 
@@ -25,24 +26,20 @@ class SchedulesController extends Controller
      */
     public function create()
     {
-        //
+        $employees = Employee::all();
+
+        return view('schedules.create', compact('employees'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \App\Http\Requests\CreateScheduleRequest $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateScheduleRequest $request)
     {
-        $request->validate([
-            'employee_id' => 'required|exists:employees,id',
-            'time_from' => 'required',
-            'time_to' => 'required',
-        ]);
-
         Employee::find($request->employee_id)
                 ->addSchedule($request->only(['time_from', 'time_to']));
 
