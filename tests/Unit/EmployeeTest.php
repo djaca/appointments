@@ -21,4 +21,12 @@ class EmployeeTest extends TestCase
         self::assertEquals('John', $employee->first_name);
         self::assertEquals('Doe', $employee->last_name);
     }
+
+    /** @test */
+    public function it_has_a_name_attribute()
+    {
+        $employee = factory(Employee::class)->create(['first_name' => 'John', 'last_name' => 'Doe']);
+
+        $this->assertEquals('John Doe', $employee->name);
+    }
 }
