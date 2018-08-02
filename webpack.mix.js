@@ -3,7 +3,7 @@ let mix = require("laravel-mix");
 require("laravel-mix-tailwind");
 require("laravel-mix-purgecss");
 
-mix.browserSync({proxy: 'starter.test', port: 8080, notify: false})
+mix.browserSync({proxy: 'appointments.test', port: 8080, notify: false})
 
 /*
  |--------------------------------------------------------------------------
