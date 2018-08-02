@@ -32,6 +32,14 @@
  * @import "components/forms";
  */
 
+nav a {
+    @apply .no-underline .text-grey-darker .pr-3 .text-sm
+}
+
+nav a:hover {
+    @apply .underline
+}
+
 label {
     @apply .block .uppercase .tracking-wide .text-grey-darker .text-xs .font-bold .mb-2
 }
