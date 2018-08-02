@@ -43,4 +43,22 @@ class ScheduleTest extends TestCase
 
         $this->assertEquals($this->time, $schedule->time_to);
     }
+
+    /** @test */
+    public function it_can_create_a_schedule()
+    {
+        $employee = factory(Employee::class)->create();
+        $timeFrom = now()->toDateTimeString();
+        $timeTo = now()->addHours(8)->toDateTimeString();
+
+        $schedule = $employee->addSchedule([
+            'time_from' => $timeFrom,
+            'time_to' => $timeTo
+        ]);
+
+
+        $this->assertEquals($employee->first_name, $schedule->employee->first_name);
+        $this->assertEquals($timeFrom, $schedule->time_from);
+        $this->assertEquals($timeTo, $schedule->time_to);
+    }
 }

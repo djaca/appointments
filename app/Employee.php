@@ -10,4 +10,9 @@ class Employee extends Model
     {
         return $this->hasMany(Schedule::class);
     }
+
+    public function addSchedule($data)
+    {
+        return $this->schedules()->create($data);
+    }
 }
