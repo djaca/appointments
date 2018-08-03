@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Service;
 use Illuminate\Http\Request;
 
-class ServiceController extends Controller
+class ServicesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +24,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        return view('services.create');
     }
 
     /**
@@ -35,7 +35,15 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:services,name',
+            'duration' => 'required',
+            'price' => 'required'
+        ]);
+
+        Service::create($request->only(['name', 'duration', 'price']));
+
+        return redirect()->route('services.index');
     }
 
     /**
