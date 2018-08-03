@@ -18,26 +18,9 @@ class SchedulesController extends Controller
      */
     public function index()
     {
-        $dayClick = "function(date, jsEvent, view) {
-            window.location.href='" . route('schedules.create') . "?day=' + date.format()
-        }";
+        $schedules = Schedule::getForCalendar();
 
-
-        $calendar = Calendar::addEvents($this->parseEvents())
-                            ->setOptions([
-                                'firstDay' => 1,
-                                'header' => [
-                                    'center' => '',
-                                    'right' => 'today prev,next'
-                                ],
-                                'timeFormat' => 'H(:mm)',
-                                'displayEventEnd' => true,
-                            ])
-                            ->setCallbacks([
-                                'dayClick' => $dayClick,
-                            ]);
-
-        return view('schedules.index', compact('calendar'));
+        return view('schedules.index', compact('schedules'));
     }
 
     /**
@@ -114,46 +97,5 @@ class SchedulesController extends Controller
     public function destroy(Schedule $schedule)
     {
         //
-    }
-
-    /**
-     * Get schedules from database and map with Calendar
-     *
-     * @return array
-     */
-    public function parseEvents()
-    {
-        $colors = $this->assignColorTo(Employee::pluck('first_name'));
-
-        return Schedule::get(['id', 'employee_id', 'time_from', 'time_to'])
-                       ->map(function ($schedule) use ($colors) {
-                           return Calendar::event(
-                               $schedule->employee->first_name,
-                               false, //full day event?
-                               $schedule->time_from, //start time
-                               $schedule->time_to, //end time
-                               $schedule->id, //optionally, event ID,
-                               [
-                                   'color' => $colors[$schedule->employee->first_name],
-                               ]
-
-                           );
-                       })
-                       ->toArray();
-    }
-
-    /**
-     * @param $employees
-     *
-     * @return mixed
-     */
-    private function assignColorTo(Collection $employees)
-    {
-        $employeesCount = $employees->count();
-        $colors = collect(['red', 'blue', 'pink', 'maroon', 'grey'])
-            ->take($employeesCount)
-            ->toArray();
-
-        return $employees->combine($colors);
     }
 }

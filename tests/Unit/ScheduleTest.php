@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Employee;
 use App\Schedule;
+use MaddHatter\LaravelFullcalendar\Calendar;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -60,5 +61,15 @@ class ScheduleTest extends TestCase
         $this->assertEquals($employee->first_name, $schedule->employee->first_name);
         $this->assertEquals($timeFrom, $schedule->time_from);
         $this->assertEquals($timeTo, $schedule->time_to);
+    }
+
+    /** @test */
+    public function it_can_get_schedules_and_format_it_for_calendar_view()
+    {
+        factory(Schedule::class, 4)->create();
+
+        $schedules = Schedule::getForCalendar();
+
+        $this->assertInstanceOf(Calendar::class, $schedules);
     }
 }

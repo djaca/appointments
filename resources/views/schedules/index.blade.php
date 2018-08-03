@@ -10,7 +10,7 @@
         </div>
 
         <div class="bg-white p-3 rounded-b">
-          {!! $calendar->calendar() !!}
+          {!! $schedules->calendar() !!}
         </div>
       </div>
     </div>
@@ -18,5 +18,5 @@
 @stop
 
 @section('js')
-  {!! $calendar->script() !!}
+  {!! $schedules->script() !!}
 @stop
