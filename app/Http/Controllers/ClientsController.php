@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Client;
 use Illuminate\Http\Request;
 
-class ClientController extends Controller
+class ClientsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,14 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'nullable|email',
+        ]);
+
+        Client::create($request->only(['name', 'phone', 'email']));
+
+        return redirect()->route('clients.index');
     }
 
     /**

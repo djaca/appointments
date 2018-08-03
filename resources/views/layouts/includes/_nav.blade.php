@@ -6,15 +6,15 @@
           {{ config('app.name', 'Laravel') }}
         </a>
       </div>
+
       <div>
-        <a href="{{ route('schedules.index') }}">
-          Schedules
-        </a>
+        <a href="{{ route('schedules.index') }}">Schedules</a>
       </div>
+
       <div class="flex-1 text-right">
-        <a href="{{ route('employees.index') }}">
-          Employees
-        </a>
+        <a href="{{ route('clients.index') }}">Clients</a>
+
+        <a href="{{ route('employees.index') }}">Employees</a>
       </div>
     </div>
   </div>
